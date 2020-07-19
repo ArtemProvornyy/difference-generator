@@ -1,0 +1,41 @@
+{
+  "name": "gendiff",
+  "version": "0.0.1",
+  "description": "Compares two configuration files and shows a difference.",
+  "bin": {
+    "gendiff": "dist/bin/gendiff.js"
+  },
+  "main": "index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "jest",
+    "build": "NODE_ENV=production babel src --out-dir dist",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArtemProvornyy/frontend-project-lvl2.git"
+  },
+  "author": "Artem Provornyi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArtemProvornyy/frontend-project-lvl2/issues"
+  },
+  "homepage": "https://github.com/ArtemProvornyy/frontend-project-lvl2#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.1.0",
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "^23.18.0",
+    "jest": "^26.1.0"
+  }
+}
