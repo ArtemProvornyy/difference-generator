@@ -5,7 +5,6 @@
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
   },
-  "main": "index.js",
   "files": [
     "dist"
   ],
