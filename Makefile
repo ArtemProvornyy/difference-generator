@@ -1,7 +1,7 @@
 install: install-deps
 
 run:
-	bin/gendiff.js
+	bin/gendiff.js -h
 
 publish:
 	npm publish --dry-run
@@ -17,5 +17,11 @@ test-coverage:
 
 install-deps:
 	npm ci
+
+local-install:
+	sudo npm link
+
+local-uninstall:
+	sudo npm unlink
 
 .PHONY: test
