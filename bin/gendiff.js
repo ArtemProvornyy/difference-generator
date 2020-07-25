@@ -10,6 +10,8 @@ const { version, description } = require('../package.json');
 program
   .description(description)
   .version(version)
-  .helpOption('-h, --help', 'output usage information');
+  .helpOption('-h, --help', 'output usage information')
+  .option('-f, --format [type]', 'output format')
+  .arguments('<filepath1> <filepath2>');
 
 program.parse();
