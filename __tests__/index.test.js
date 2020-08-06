@@ -13,13 +13,13 @@ const jsonDiff = `{
 let expectedJson;
 
 beforeAll(() => {
-  expectedJson = fs.readFileSync('testFile.json', 'utf-8');
+  expectedJson = fs.readFileSync('__tests__/testFile.json', 'utf-8');
 });
 
 test('get data from file', () => {
-  expect(getData('testFile.json')).toEqual(expectedJson);
+  expect(getData('__tests__/testFile.json')).toEqual(expectedJson);
 });
 
 test('get difference of two json files', () => {
-  expect(getJSONDiff('file1.json', 'file2.json')).toEqual(jsonDiff);
+  expect(getJSONDiff('__tests__/file1.json', '__tests__/file2.json')).toEqual(jsonDiff);
 });
