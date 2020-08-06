@@ -1,7 +1,7 @@
 install: install-deps
 
 run:
-	bin/gendiff.js -h
+	bin/gendiff.js file1.json file2.json
 
 publish:
 	npm publish --dry-run

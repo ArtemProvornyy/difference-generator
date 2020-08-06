@@ -1,7 +1,8 @@
 {
   "name": "gendiff",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Compares two configuration files and shows a difference.",
+  "main": "index.js",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
@@ -34,6 +35,7 @@
     "jest-cli": "^26.1.0"
   },
   "dependencies": {
-    "commander": "^6.0.0"
+    "commander": "^6.0.0",
+    "lodash": "^4.17.19"
   }
 }
