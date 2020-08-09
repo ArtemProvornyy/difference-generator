@@ -10,7 +10,8 @@
     "node": ">=14"
   },
   "scripts": {
-    "test": "npx -n --experimental-vm-modules jest"
+    "test": "npx -n --experimental-vm-modules jest",
+    "test:watch": "npx -n --experimental-vm-modules jest --watch"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,13 @@
   },
   "type": "module",
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "*.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "homepage": "https://github.com/ArtemProvornyy/frontend-project-lvl2#readme",
   "devDependencies": {
