@@ -24,4 +24,4 @@ gendiff <filepath1.json> <filepath2.json>
 gendiff <filepath1.yml> <filepath2.yml>
 ```
 
-[<script id="asciicast-353390" src="https://asciinema.org/a/353390.js" async></script>]
+[![asciicast](https://asciinema.org/a/353390.svg)](https://asciinema.org/a/353390)
