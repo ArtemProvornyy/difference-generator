@@ -17,7 +17,7 @@ npm link
 gendiff <filepath1.json> <filepath2.json>
 ```
 
-[![asciicast](https://asciinema.org/a/352036.svg)](https://asciinema.org/a/352036)
+[![asciicast](https://asciinema.org/a/353388.svg)](https://asciinema.org/a/353388)
 
 ### Generate difference of YAML files
 ```
