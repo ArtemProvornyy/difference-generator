@@ -1,48 +1,54 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
+import getParser from './src/parsers.js';
 
 export const getData = (filepath) => {
   const cwd = process.cwd();
-  const absFilepath = filepath.includes('/') ? filepath : path.resolve(`${cwd}`, `${filepath}`);
+  const absFilepath = filepath.includes(cwd) ? filepath : path.resolve(`${cwd}`, `${filepath}`);
 
   return fs.readFileSync(absFilepath, 'utf-8');
 };
 
-export default (filepath1, filepath2) => {
-  const jsonFile1 = getData(filepath1);
-  const jsonFile2 = getData(filepath2);
+export const getDifference = (obj1, obj2) => {
+  const obj1Keys = Object.keys(obj1);
+  const obj2Keys = Object.keys(obj2);
 
-  const jsonFile1Obj = JSON.parse(jsonFile1);
-  const jsonFile2Obj = JSON.parse(jsonFile2);
+  const objectsKeys = [...obj1Keys, ...obj2Keys].sort();
 
-  const jsonFile1Keys = Object.keys(jsonFile1Obj);
-  const jsonFile2Keys = Object.keys(jsonFile2Obj);
+  const uniqObjectsKeys = _.uniq(objectsKeys);
 
-  const filesKeys = [...jsonFile1Keys, ...jsonFile2Keys].sort();
+  const difference = uniqObjectsKeys.reduce((acc, key) => {
+    const firstObjValue = obj1[key];
+    const secondObjValue = obj2[key];
 
-  const uniqFilesKeys = _.uniq(filesKeys);
+    const hasFirstObjKey = _.has(obj1, key);
+    const hasSecondObjKey = _.has(obj2, key);
 
-  const difference = uniqFilesKeys.reduce((acc, key) => {
-    const firstFileValue = jsonFile1Obj[key];
-    const secondFileValue = jsonFile2Obj[key];
-    const firstFileHasKey = _.has(jsonFile1Obj, key);
-    const secondFileHasKey = _.has(jsonFile2Obj, key);
-
-    if (firstFileHasKey && secondFileHasKey) {
-      if (firstFileValue === secondFileValue) {
-        return [...acc, `  ${key}: ${firstFileValue}`];
-      }
-      if (firstFileValue !== secondFileValue) {
-        return [...acc, `- ${key}: ${firstFileValue}`, `+ ${key}: ${secondFileValue}`];
-      }
+    if (hasFirstObjKey && !hasSecondObjKey) {
+      return [...acc, `- ${key}: ${firstObjValue}`];
     }
-    if (firstFileHasKey && !secondFileHasKey) {
-      return [...acc, `- ${key}: ${firstFileValue}`];
+    if (!hasFirstObjKey && hasSecondObjKey) {
+      return [...acc, `+ ${key}: ${secondObjValue}`];
+    }
+    if (firstObjValue !== secondObjValue) {
+      return [...acc, `- ${key}: ${firstObjValue}`, `+ ${key}: ${secondObjValue}`];
     }
 
-    return [...acc, `+ ${key}: ${secondFileValue}`];
+    return [...acc, `  ${key}: ${firstObjValue}`];
   }, []);
 
   return `{\n  ${difference.join('\n  ')}\n}`;
+};
+
+export default (filepath1, filepath2) => {
+  const file1 = getData(filepath1);
+  const file2 = getData(filepath2);
+
+  const parse = getParser(filepath1);
+
+  const file1Obj = parse(file1);
+  const file2Obj = parse(file2);
+
+  return getDifference(file1Obj, file2Obj);
 };

@@ -1,7 +1,7 @@
 install: install-deps
 
 run:
-	bin/gendiff.js file1.json file2.json
+	bin/gendiff.js __fixtures__/file1.yml __fixtures__/file2.yml
 
 publish:
 	npm publish --dry-run
