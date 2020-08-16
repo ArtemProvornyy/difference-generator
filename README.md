@@ -25,3 +25,9 @@ gendiff <filepath1.yml> <filepath2.yml>
 ```
 
 [![asciicast](https://asciinema.org/a/353390.svg)](https://asciinema.org/a/353390)
+
+### Generate difference of INI files
+```
+gendiff <filepath1.ini> <filepath2.ini>
+```
+
