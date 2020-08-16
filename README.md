@@ -31,3 +31,4 @@ gendiff <filepath1.yml> <filepath2.yml>
 gendiff <filepath1.ini> <filepath2.ini>
 ```
 
+[![asciicast](https://asciinema.org/a/353679.svg)](https://asciinema.org/a/353679)
