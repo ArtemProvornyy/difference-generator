@@ -32,3 +32,7 @@ gendiff <filepath1.ini> <filepath2.ini>
 ```
 
 [![asciicast](https://asciinema.org/a/353679.svg)](https://asciinema.org/a/353679)
+
+### Recursive difference
+
+[![asciicast](https://asciinema.org/a/361906.svg)](https://asciinema.org/a/361906)

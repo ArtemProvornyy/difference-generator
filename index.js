@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import _ from 'lodash';
 import getParser from './src/parsers.js';
+import { genDiffOfTwoObj } from './src/gendiff.js';
+import recursive from './src/stylish.js';
 
 export const getData = (filepath) => {
   const cwd = process.cwd();
@@ -10,38 +11,7 @@ export const getData = (filepath) => {
   return fs.readFileSync(absFilepath, 'utf-8');
 };
 
-export const getDifference = (obj1, obj2) => {
-  const obj1Keys = Object.keys(obj1);
-  const obj2Keys = Object.keys(obj2);
-
-  const objectsKeys = [...obj1Keys, ...obj2Keys].sort();
-
-  const uniqObjectsKeys = _.uniq(objectsKeys);
-
-  const difference = uniqObjectsKeys.reduce((acc, key) => {
-    const firstObjValue = obj1[key];
-    const secondObjValue = obj2[key];
-
-    const hasFirstObjKey = _.has(obj1, key);
-    const hasSecondObjKey = _.has(obj2, key);
-
-    if (hasFirstObjKey && !hasSecondObjKey) {
-      return [...acc, `- ${key}: ${firstObjValue}`];
-    }
-    if (!hasFirstObjKey && hasSecondObjKey) {
-      return [...acc, `+ ${key}: ${secondObjValue}`];
-    }
-    if (firstObjValue !== secondObjValue) {
-      return [...acc, `- ${key}: ${firstObjValue}`, `+ ${key}: ${secondObjValue}`];
-    }
-
-    return [...acc, `  ${key}: ${firstObjValue}`];
-  }, []);
-
-  return `{\n  ${difference.join('\n  ')}\n}`;
-};
-
-export default (filepath1, filepath2) => {
+export default (filepath1, filepath2, format) => {
   const file1 = getData(filepath1);
   const file2 = getData(filepath2);
 
@@ -50,5 +20,9 @@ export default (filepath1, filepath2) => {
   const file1Obj = parse(file1);
   const file2Obj = parse(file2);
 
-  return getDifference(file1Obj, file2Obj);
+  if (format === 'recursive') {
+    return recursive(genDiffOfTwoObj(file1Obj, file2Obj));
+  }
+
+  return recursive(genDiffOfTwoObj(file1Obj, file2Obj));
 };

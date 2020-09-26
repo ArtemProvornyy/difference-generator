@@ -2,42 +2,25 @@
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
 import fs from 'fs';
-import getDiffOfTwoFiles, { getData, getDifference } from '..';
+import genDiffOfTwoFiles, { getData } from '..';
+import stylish from '../src/stylish.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const obj1 = {
-  host: 'hexlet.io',
-  timeout: 50,
-  proxy: '123.234.53.22',
-  follow: false,
-};
-const obj2 = {
-  timeout: 20,
-  verbose: true,
-  host: 'hexlet.io',
-};
-
-const expectedDiff = `{
-  - follow: false
-    host: hexlet.io
-  - proxy: 123.234.53.22
-  - timeout: 50
-  + timeout: 20
-  + verbose: true
-}`;
-
 const getFixturePath = (filename) => resolve(__dirname, '..', '__fixtures__', filename);
+const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
 let expectedJson;
 let expectedYaml;
 let expectedIni;
+let expectedDiff;
 
 beforeEach(() => {
-  expectedJson = fs.readFileSync(getFixturePath('testFile.json'), 'utf-8');
-  expectedYaml = fs.readFileSync(getFixturePath('testFile.yml'), 'utf-8');
-  expectedIni = fs.readFileSync(getFixturePath('testFile.ini'), 'utf-8');
+  expectedJson = readFile('testFile.json');
+  expectedYaml = readFile('testFile.yml');
+  expectedIni = readFile('testFile.ini');
+  expectedDiff = readFile('result.txt');
 });
 
 describe('get data from file', () => {
@@ -53,12 +36,8 @@ describe('get data from file', () => {
   });
 });
 
-test('get difference of two objects', () => {
-  expect(getDifference(obj1, obj2)).toEqual(expectedDiff);
-});
-
-test('get difference of two files', () => {
-  expect(getDiffOfTwoFiles(getFixturePath('file1.json'), getFixturePath('file2.json'))).toEqual(expectedDiff);
-  expect(getDiffOfTwoFiles(getFixturePath('file1.yml'), getFixturePath('file2.yml'))).toEqual(expectedDiff);
-  expect(getDiffOfTwoFiles(getFixturePath('file1.ini'), getFixturePath('file2.ini'))).toEqual(expectedDiff);
+test('generate difference of two files', () => {
+  expect(genDiffOfTwoFiles(getFixturePath('file1.json'), getFixturePath('file2.json'), stylish)).toEqual(expectedDiff);
+  expect(genDiffOfTwoFiles(getFixturePath('file1.yml'), getFixturePath('file2.yml'), stylish)).toEqual(expectedDiff);
+  expect(genDiffOfTwoFiles(getFixturePath('file1.ini'), getFixturePath('file2.ini'), stylish)).toEqual(expectedDiff);
 });
