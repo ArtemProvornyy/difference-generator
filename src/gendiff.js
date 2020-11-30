@@ -1,23 +1,6 @@
 import _ from 'lodash';
 
-export const stringify = (obj) => {
-  if (!_.isPlainObject(obj)) {
-    return obj;
-  }
-
-  const objKeys = Object.keys(obj);
-  const string = objKeys.map((key) => {
-    const objValue = obj[key];
-    if (_.isPlainObject(objValue)) {
-      return `  ${key}: ${stringify(objValue)}`;
-    }
-    return `  ${key}: ${objValue}`;
-  });
-
-  return `{${string.join(',')}}`;
-};
-
-export const genDiffOfTwoObj = (obj1, obj2) => {
+const buildAST = (obj1, obj2) => {
   const obj1Keys = Object.keys(obj1);
   const obj2Keys = Object.keys(obj2);
 
@@ -29,27 +12,30 @@ export const genDiffOfTwoObj = (obj1, obj2) => {
     const firstObjValue = obj1[key];
     const secondObjValue = obj2[key];
 
-    const firstObjValueStringify = stringify(firstObjValue);
-    const secondObjValueStringify = stringify(secondObjValue);
-
     const hasFirstObjKey = _.has(obj1, key);
     const hasSecondObjKey = _.has(obj2, key);
 
     if (hasFirstObjKey && !hasSecondObjKey) {
-      return `- ${key}: ${firstObjValueStringify}`;
+      return { name: key, value: firstObjValue, status: 'deleted' };
     }
     if (!hasFirstObjKey && hasSecondObjKey) {
-      return `+ ${key}: ${secondObjValueStringify}`;
+      return { name: key, value: secondObjValue, status: 'added' };
     }
     if (_.isPlainObject(firstObjValue) && _.isPlainObject(secondObjValue)) {
-      return `  ${key}: {${genDiffOfTwoObj(firstObjValue, secondObjValue)}}`;
+      return {
+        name: key, value: 'nested', status: 'changed', children: buildAST(firstObjValue, secondObjValue),
+      };
     }
     if (firstObjValue !== secondObjValue) {
-      return `- ${key}: ${firstObjValueStringify},+ ${key}: ${secondObjValueStringify}`;
+      return {
+        name: key, value: secondObjValue, status: 'changed', oldValue: firstObjValue,
+      };
     }
 
-    return `  ${key}: ${firstObjValueStringify}`;
+    return { name: key, value: firstObjValue, status: 'unchanged' };
   }, []);
 
-  return difference.join(',');
+  return difference;
 };
+
+export default buildAST;
