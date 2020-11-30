@@ -1,23 +1,63 @@
-export default (diff) => {
-  let braceCounter = 2;
-  const diffArr = diff.split('');
+import _ from 'lodash';
 
-  const stylishArr = diffArr.map((char) => {
-    switch (char) {
-      case '{':
-        braceCounter += 4;
-        return `${char}\n${' '.repeat(braceCounter)}`;
-      case '}':
-        braceCounter -= 4;
-        return `\n${' '.repeat(braceCounter + 2)}${char}`;
-      case ',':
-        return `\n${' '.repeat(braceCounter)}`;
-      case '"':
-        return '';
-      default:
-        return char;
+const stringify = (obj, depth) => {
+  const keys = Object.keys(obj);
+  const indent = ' '.repeat(depth);
+  const braceIndent = ' '.repeat(depth - 4);
+
+  const innerPart = keys.map((key) => {
+    const value = obj[key];
+    if (_.isPlainObject(value)) {
+      return `${indent}${key}: ${stringify(value, depth + 4)}`;
     }
+
+    return `${indent}${key}: ${value}`;
   });
 
-  return `{\n  ${stylishArr.join('')}\n}`;
+  return `{\n${innerPart.join('\n')}\n${braceIndent}}`;
 };
+
+const stylish = (diff) => {
+  const iter = (node, depth) => {
+    if (node.lenght === 0) {
+      return '';
+    }
+
+    return node.flatMap((child) => {
+      const { name, value, status, oldValue, children } = child;
+      const indent = ' '.repeat(depth);
+      if (value === 'nested' && status === 'changed') {
+        return `${indent}  ${name}: {\n${iter(children, depth + 4)}\n${indent}  }`.split(',');
+      }
+      if (_.isPlainObject(value) && status === 'changed') {
+        return `${indent}- ${name}: ${oldValue}\n${indent}+ ${name}: ${stringify(value, depth + 6)}`;
+      }
+      if (_.isPlainObject(oldValue) && status === 'changed') {
+        return `${indent}- ${name}: ${stringify(oldValue, depth + 6)}\n${indent}+ ${name}: ${value}`;
+      }
+      if (_.isPlainObject(value) && status === 'added') {
+        return `${indent}+ ${name}: ${stringify(value, depth + 6)}`;
+      }
+      if (_.isPlainObject(value) && status === 'deleted') {
+        return `${indent}- ${name}: ${stringify(value, depth + 6)}`;
+      }
+      if (status === 'unchanged') {
+        return `${indent}  ${name}: ${value}`;
+      }
+      if (status === 'added') {
+        return `${indent}+ ${name}: ${value}`;
+      }
+      if (status === 'deleted') {
+        return `${indent}- ${name}: ${value}`;
+      }
+
+      return `${indent}- ${name}: ${oldValue}\n${indent}+ ${name}: ${value}`;
+    });
+  };
+
+  const innerPart = iter(diff, 2);
+
+  return `{\n${innerPart.join('\n')}\n}`;
+};
+
+export default stylish;
