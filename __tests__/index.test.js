@@ -2,8 +2,8 @@
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
 import fs from 'fs';
-import genDiffOfTwoFiles, { getData } from '..';
-import stylish from '../src/stylish.js';
+import genDiff, { getData } from '..';
+import stylish from '../src/formatters/stylish.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -36,8 +36,14 @@ describe('get data from file', () => {
   });
 });
 
-test('generate difference of two files', () => {
-  expect(genDiffOfTwoFiles(getFixturePath('file1.json'), getFixturePath('file2.json'), stylish)).toEqual(expectedDiff);
-  expect(genDiffOfTwoFiles(getFixturePath('file1.yml'), getFixturePath('file2.yml'), stylish)).toEqual(expectedDiff);
-  expect(genDiffOfTwoFiles(getFixturePath('file1.ini'), getFixturePath('file2.ini'), stylish)).toEqual(expectedDiff);
+describe('Generate difference of two files', () => {
+  test('recursive.json', () => {
+    expect(genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), stylish)).toEqual(expectedDiff);
+  });
+  test('recursive.yml', () => {
+    expect(genDiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'), stylish)).toEqual(expectedDiff);
+  });
+  test('recursive.ini', () => {
+    expect(genDiff(getFixturePath('file1.ini'), getFixturePath('file2.ini'), stylish)).toEqual(expectedDiff);
+  });
 });
