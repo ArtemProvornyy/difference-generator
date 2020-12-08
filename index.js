@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import getParser from './src/parsers.js';
-import { genDiffOfTwoObj } from './src/gendiff.js';
-import recursive from './src/stylish.js';
+import buildAST from './src/gendiff.js';
+import switchFormat from './src/formatters';
 
 export const getData = (filepath) => {
   const cwd = process.cwd();
@@ -20,9 +20,7 @@ export default (filepath1, filepath2, format) => {
   const file1Obj = parse(file1);
   const file2Obj = parse(file2);
 
-  if (format === 'recursive') {
-    return recursive(genDiffOfTwoObj(file1Obj, file2Obj));
-  }
+  const formatter = switchFormat(format);
 
-  return recursive(genDiffOfTwoObj(file1Obj, file2Obj));
+  return formatter(buildAST(file1Obj, file2Obj));
 };
