@@ -16,23 +16,23 @@ const buildAST = (obj1, obj2) => {
     const hasSecondObjKey = _.has(obj2, key);
 
     if (hasFirstObjKey && !hasSecondObjKey) {
-      return { name: key, value: firstObjValue, status: 'deleted' };
+      return { name: key, value: firstObjValue, status: 'removed' };
     }
     if (!hasFirstObjKey && hasSecondObjKey) {
       return { name: key, value: secondObjValue, status: 'added' };
     }
     if (_.isPlainObject(firstObjValue) && _.isPlainObject(secondObjValue)) {
       return {
-        name: key, value: 'nested', status: 'changed', children: buildAST(firstObjValue, secondObjValue),
+        name: key, value: 'nested', status: 'updated', children: buildAST(firstObjValue, secondObjValue),
       };
     }
     if (firstObjValue !== secondObjValue) {
       return {
-        name: key, value: secondObjValue, status: 'changed', oldValue: firstObjValue,
+        name: key, value: secondObjValue, status: 'updated', oldValue: firstObjValue,
       };
     }
 
-    return { name: key, value: firstObjValue, status: 'unchanged' };
+    return { name: key, value: firstObjValue, status: 'outdated' };
   }, []);
 
   return difference;

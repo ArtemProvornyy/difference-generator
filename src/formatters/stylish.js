@@ -28,28 +28,28 @@ const stylish = (diff) => {
         name, value, status, oldValue, children,
       } = child;
       const indent = ' '.repeat(depth);
-      if (value === 'nested' && status === 'changed') {
+      if (value === 'nested' && status === 'updated') {
         return `${indent}  ${name}: {\n${iter(children, depth + 4)}\n${indent}  }`.split(',');
       }
-      if (_.isPlainObject(value) && status === 'changed') {
+      if (_.isPlainObject(value) && status === 'updated') {
         return `${indent}- ${name}: ${oldValue}\n${indent}+ ${name}: ${stringify(value, depth + 6)}`;
       }
-      if (_.isPlainObject(oldValue) && status === 'changed') {
+      if (_.isPlainObject(oldValue) && status === 'updated') {
         return `${indent}- ${name}: ${stringify(oldValue, depth + 6)}\n${indent}+ ${name}: ${value}`;
       }
       if (_.isPlainObject(value) && status === 'added') {
         return `${indent}+ ${name}: ${stringify(value, depth + 6)}`;
       }
-      if (_.isPlainObject(value) && status === 'deleted') {
+      if (_.isPlainObject(value) && status === 'removed') {
         return `${indent}- ${name}: ${stringify(value, depth + 6)}`;
       }
-      if (status === 'unchanged') {
+      if (status === 'outdated') {
         return `${indent}  ${name}: ${value}`;
       }
       if (status === 'added') {
         return `${indent}+ ${name}: ${value}`;
       }
-      if (status === 'deleted') {
+      if (status === 'removed') {
         return `${indent}- ${name}: ${value}`;
       }
 
