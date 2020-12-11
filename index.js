@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import getParser from './src/parsers.js';
 import buildAST from './src/gendiff.js';
-import switchFormat from './src/formatters';
+import switchFormat from './src/formatters/index.js';
 
 export const getData = (filepath) => {
   const cwd = process.cwd();
