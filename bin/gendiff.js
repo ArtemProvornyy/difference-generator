@@ -12,7 +12,7 @@ program
   .description(description)
   .version(version)
   .helpOption('-h, --help', 'output usage information')
-  .option('-f, --format [type]', 'output format', 'recursive')
+  .option('-f, --format [type]', 'output format', 'stylish')
   .arguments('<filepath1> <filepath2>')
   .action((filepath1, filepath2) => console.log(genDiff(filepath1, filepath2, program.format)));
 
