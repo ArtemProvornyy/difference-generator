@@ -4,7 +4,7 @@ import getParser from './src/parsers.js';
 import buildAST from './src/gendiff.js';
 import switchFormat from './src/formatters/index.js';
 
-export const getData = (filepath) => {
+const getData = (filepath) => {
   const cwd = process.cwd();
   const absFilepath = filepath.includes(cwd) ? filepath : path.resolve(`${cwd}`, `${filepath}`);
 

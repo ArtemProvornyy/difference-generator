@@ -10,31 +10,12 @@ const __dirname = dirname(__filename);
 const getFixturePath = (filename) => resolve(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-let expectedJson;
-let expectedYaml;
-let expectedIni;
 let expectedRecursive;
 let expectedPlain;
 
 beforeEach(() => {
-  expectedJson = readFile('testFile.json');
-  expectedYaml = readFile('testFile.yml');
-  expectedIni = readFile('testFile.ini');
   expectedRecursive = readFile('recursive.txt');
   expectedPlain = readFile('plain.txt');
-});
-
-describe('get data from file', () => {
-  test('absolute path', () => {
-    expect(getData(getFixturePath('testFile.json'))).toEqual(expectedJson);
-    expect(getData(getFixturePath('testFile.yml'))).toEqual(expectedYaml);
-    expect(getData(getFixturePath('testFile.ini'))).toEqual(expectedIni);
-  });
-  test('relative path', () => {
-    expect(getData('__fixtures__/testFile.json')).toEqual(expectedJson);
-    expect(getData('__fixtures__/testFile.yml')).toEqual(expectedYaml);
-    expect(getData('__fixtures__/testFile.ini')).toEqual(expectedIni);
-  });
 });
 
 describe('Generate difference of two files', () => {
