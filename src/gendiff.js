@@ -1,14 +1,9 @@
 import _ from 'lodash';
 
 const buildAST = (obj1, obj2) => {
-  const obj1Keys = Object.keys(obj1);
-  const obj2Keys = Object.keys(obj2);
+  const keys = _.union(_.keys(obj1), _.keys(obj2)).sort();
 
-  const objectsKeys = [...obj1Keys, ...obj2Keys].sort();
-
-  const uniqObjectsKeys = _.uniq(objectsKeys);
-
-  const difference = uniqObjectsKeys.map((key) => {
+  const difference = keys.map((key) => {
     const firstObjValue = obj1[key];
     const secondObjValue = obj2[key];
 
