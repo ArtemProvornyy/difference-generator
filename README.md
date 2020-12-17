@@ -52,6 +52,6 @@ $ gendiff --format [type] <filepath1> <filepath2>
 
 [![asciicast](https://asciinema.org/a/379827.svg)](https://asciinema.org/a/379827)
 
-### JSON format
+### Json format
 
 [![asciicast](https://asciinema.org/a/379828.svg)](https://asciinema.org/a/379828)
