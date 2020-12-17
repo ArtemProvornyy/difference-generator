@@ -6,33 +6,52 @@ Compares two configuration files and shows a difference.
 [![Node CI](https://github.com/ArtemProvornyy/frontend-project-lvl2/workflows/Node%20CI/badge.svg)](https://github.com/ArtemProvornyy/frontend-project-lvl2/actions)
 
 ## Installation
+Clone this repository and type
 ```
-npm link
-```
-
-[![asciicast](https://asciinema.org/a/352041.svg)](https://asciinema.org/a/352041)
-
-### Generate difference of JSON files
-```
-gendiff <filepath1.json> <filepath2.json>
+$ npm link
 ```
 
-[![asciicast](https://asciinema.org/a/353388.svg)](https://asciinema.org/a/353388)
-
-### Generate difference of YAML files
+## Show help
 ```
-gendiff <filepath1.yml> <filepath2.yml>
+$ gendiff --help
 ```
 
-[![asciicast](https://asciinema.org/a/353390.svg)](https://asciinema.org/a/353390)
+[![asciicast](https://asciinema.org/a/379839.svg)](https://asciinema.org/a/379839)
 
-### Generate difference of INI files
+## Generate difference of two files
+You can compare three file types: json, yaml, ini.
+
 ```
-gendiff <filepath1.ini> <filepath2.ini>
+$ gendiff <filepath1> <filepath2>
 ```
 
-[![asciicast](https://asciinema.org/a/353679.svg)](https://asciinema.org/a/353679)
+### Compare JSON files
 
-### Recursive difference
+[![asciicast](https://asciinema.org/a/379824.svg)](https://asciinema.org/a/379824)
 
-[![asciicast](https://asciinema.org/a/361906.svg)](https://asciinema.org/a/361906)
+### Compare YAML files
+
+[![asciicast](https://asciinema.org/a/379825.svg)](https://asciinema.org/a/379825)
+
+### Compare INI files
+
+[![asciicast](https://asciinema.org/a/379826.svg)](https://asciinema.org/a/379826)
+
+
+## Output formats
+The following output file formatters are supported: stylish, plain, json. Stylish as a default formatter.
+
+```
+$ gendiff --format [type] <filepath1> <filepath2>
+```
+### Stylish format
+
+[![asciicast](https://asciinema.org/a/379841.svg)](https://asciinema.org/a/379841)
+
+### Plain format
+
+[![asciicast](https://asciinema.org/a/379827.svg)](https://asciinema.org/a/379827)
+
+### JSON format
+
+[![asciicast](https://asciinema.org/a/379828.svg)](https://asciinema.org/a/379828)
