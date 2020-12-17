@@ -6,7 +6,7 @@ Compares two configuration files and shows a difference.
 [![Node CI](https://github.com/ArtemProvornyy/frontend-project-lvl2/workflows/Node%20CI/badge.svg)](https://github.com/ArtemProvornyy/frontend-project-lvl2/actions)
 
 ## Installation
-Clone this repository and type
+Clone this repository and type:
 ```
 $ npm link
 ```
