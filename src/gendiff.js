@@ -32,7 +32,7 @@ const buildAST = (obj1, obj2) => {
     }
 
     return {
-      name: key, value: firstValue, status: 'outdated',
+      name: key, value: firstValue, status: 'unchanged',
     };
   }, []);
 

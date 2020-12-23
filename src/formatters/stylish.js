@@ -43,7 +43,7 @@ const stylish = (diff) => {
       if (_.isPlainObject(value) && status === 'removed') {
         return `${indent}- ${name}: ${stringify(value, depth + 6)}`;
       }
-      if (status === 'outdated') {
+      if (status === 'unchanged') {
         return `${indent}  ${name}: ${value}`;
       }
       if (status === 'added') {
