@@ -2,7 +2,7 @@ import stylish from './stylish.js';
 import plain from './plain.js';
 import json from './json.js';
 
-export default (format) => {
+export default (format = 'stylish') => {
   switch (format) {
     case 'stylish':
       return stylish;
@@ -11,6 +11,6 @@ export default (format) => {
     case 'json':
       return json;
     default:
-      return stylish;
+      throw new Error('Unsupported format. Please enter the correct format.');
   }
 };
