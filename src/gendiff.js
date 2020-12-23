@@ -22,10 +22,10 @@ const buildAST = (obj1, obj2) => {
     }
     if (_.isPlainObject(firstValue) && _.isPlainObject(secondValue)) {
       return {
-        name: key, value: 'nested', status: 'updated', children: buildAST(firstValue, secondValue),
+        name: key, status: 'nested', children: buildAST(firstValue, secondValue),
       };
     }
-    if (_.isEqual(firstValue, secondValue)) {
+    if (!_.isEqual(firstValue, secondValue)) {
       return {
         name: key, value: secondValue, status: 'updated', oldValue: firstValue,
       };

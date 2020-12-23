@@ -28,7 +28,7 @@ const stylish = (diff) => {
         name, value, status, oldValue, children,
       } = child;
       const indent = ' '.repeat(depth);
-      if (value === 'nested' && status === 'updated') {
+      if (status === 'nested') {
         return `${indent}  ${name}: {\n${iter(children, depth + 4)}\n${indent}  }`.split(',');
       }
       if (_.isPlainObject(value) && status === 'updated') {

@@ -17,7 +17,7 @@ const plain = (diff) => {
       const outputOldValue = _.isPlainObject(oldValue) ? '[complex value]' : addQuotes(oldValue);
       const currentPath = [...path, name];
 
-      if (value === 'nested') {
+      if (status === 'nested') {
         return iter(children, currentPath);
       }
       if (status === 'added') {
