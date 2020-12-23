@@ -8,6 +8,6 @@ export default (format) => {
     case '.json':
       return JSON.parse;
     default:
-      throw new Error('Unexpected content format');
+      throw new Error('Unsupported content format');
   }
 };
