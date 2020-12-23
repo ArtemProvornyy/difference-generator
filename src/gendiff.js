@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const buildAST = (obj1, obj2) => {
+const buildDiff = (obj1, obj2) => {
   const keys = _.sortBy(_.union(_.keys(obj1), _.keys(obj2)));
 
   const difference = keys.map((key) => {
@@ -22,7 +22,7 @@ const buildAST = (obj1, obj2) => {
     }
     if (_.isPlainObject(firstValue) && _.isPlainObject(secondValue)) {
       return {
-        name: key, status: 'nested', children: buildAST(firstValue, secondValue),
+        name: key, status: 'nested', children: buildDiff(firstValue, secondValue),
       };
     }
     if (!_.isEqual(firstValue, secondValue)) {
@@ -39,4 +39,4 @@ const buildAST = (obj1, obj2) => {
   return difference;
 };
 
-export default buildAST;
+export default buildDiff;

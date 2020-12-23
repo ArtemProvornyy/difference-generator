@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import getParser from './parsers.js';
-import buildAST from './gendiff.js';
+import buildDiff from './gendiff.js';
 import switchFormat from './formatters/index.js';
 
 const getContent = (filepath) => {
@@ -26,5 +26,5 @@ export default (filepath1, filepath2, format) => {
 
   const formatter = switchFormat(format);
 
-  return formatter(buildAST(content1Obj, content2Obj));
+  return formatter(buildDiff(content1Obj, content2Obj));
 };
