@@ -4,35 +4,35 @@ const buildAST = (obj1, obj2) => {
   const keys = _.sortBy(_.union(_.keys(obj1), _.keys(obj2)));
 
   const difference = keys.map((key) => {
-    const firstObjValue = obj1[key];
-    const secondObjValue = obj2[key];
+    const firstValue = obj1[key];
+    const secondValue = obj2[key];
 
     const hasFirstObjKey = _.has(obj1, key);
     const hasSecondObjKey = _.has(obj2, key);
 
-    if (hasFirstObjKey && !hasSecondObjKey) {
+    if (!hasSecondObjKey) {
       return {
-        name: key, value: firstObjValue, status: 'removed',
+        name: key, value: firstValue, status: 'removed',
       };
     }
-    if (!hasFirstObjKey && hasSecondObjKey) {
+    if (!hasFirstObjKey) {
       return {
-        name: key, value: secondObjValue, status: 'added',
+        name: key, value: secondValue, status: 'added',
       };
     }
-    if (_.isPlainObject(firstObjValue) && _.isPlainObject(secondObjValue)) {
+    if (_.isPlainObject(firstValue) && _.isPlainObject(secondValue)) {
       return {
-        name: key, value: 'nested', status: 'updated', children: buildAST(firstObjValue, secondObjValue),
+        name: key, value: 'nested', status: 'updated', children: buildAST(firstValue, secondValue),
       };
     }
-    if (firstObjValue !== secondObjValue) {
+    if (_.isEqual(firstValue, secondValue)) {
       return {
-        name: key, value: secondObjValue, status: 'updated', oldValue: firstObjValue,
+        name: key, value: secondValue, status: 'updated', oldValue: firstValue,
       };
     }
 
     return {
-      name: key, value: firstObjValue, status: 'outdated',
+      name: key, value: firstValue, status: 'outdated',
     };
   }, []);
 
