@@ -15,12 +15,13 @@ export default (filepath1, filepath2, format) => {
   const content1 = getContent(filepath1);
   const content2 = getContent(filepath2);
 
-  const parse = getParser(filepath1);
+  const parse1 = getParser(filepath1);
+  const parse2 = getParser(filepath2);
 
-  const file1Obj = parse(content1);
-  const file2Obj = parse(content2);
+  const content1Obj = parse1(content1);
+  const content2Obj = parse2(content2);
 
   const formatter = switchFormat(format);
 
-  return formatter(buildAST(file1Obj, file2Obj));
+  return formatter(buildAST(content1Obj, content2Obj));
 };
