@@ -6,7 +6,7 @@ import switchFormat from './src/formatters/index.js';
 
 const getData = (filepath) => {
   const cwd = process.cwd();
-  const absFilepath = filepath.includes(cwd) ? filepath : path.resolve(`${cwd}`, `${filepath}`);
+  const absFilepath = path.resolve(cwd, filepath);
 
   return fs.readFileSync(absFilepath, 'utf-8');
 };
