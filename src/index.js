@@ -15,8 +15,11 @@ export default (filepath1, filepath2, format) => {
   const content1 = getContent(filepath1);
   const content2 = getContent(filepath2);
 
-  const parse1 = getParser(filepath1);
-  const parse2 = getParser(filepath2);
+  const extention1 = path.extname(filepath1).toLowerCase();
+  const extention2 = path.extname(filepath2).toLowerCase();
+
+  const parse1 = getParser(extention1);
+  const parse2 = getParser(extention2);
 
   const content1Obj = parse1(content1);
   const content2Obj = parse2(content2);
