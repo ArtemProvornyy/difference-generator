@@ -13,13 +13,10 @@ const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8'
 const table = [
   ['json', 'stylish'],
   ['yml', 'stylish'],
-  ['ini', 'stylish'],
   ['json', 'plain'],
   ['yml', 'plain'],
-  ['ini', 'plain'],
   ['json', 'json'],
   ['yml', 'json'],
-  ['ini', 'json'],
 ];
 
 describe('Generate difference of two files', () => {
