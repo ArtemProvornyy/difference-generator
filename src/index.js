@@ -11,7 +11,7 @@ const getContent = (filepath) => {
   return fs.readFileSync(absFilepath, 'utf-8');
 };
 
-export default (filepath1, filepath2, format) => {
+export default (filepath1, filepath2, format = 'stylish') => {
   const content1 = getContent(filepath1);
   const content2 = getContent(filepath2);
 
