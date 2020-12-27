@@ -19,7 +19,7 @@ $ gendiff --help
 [![asciicast](https://asciinema.org/a/379839.svg)](https://asciinema.org/a/379839)
 
 ## Generate difference of two files
-You can compare three file types: json, yaml, ini.
+You can compare two file types: json and yaml.
 
 ```
 $ gendiff <filepath1> <filepath2>
@@ -32,11 +32,6 @@ $ gendiff <filepath1> <filepath2>
 ### Compare YAML files
 
 [![asciicast](https://asciinema.org/a/379825.svg)](https://asciinema.org/a/379825)
-
-### Compare INI files
-
-[![asciicast](https://asciinema.org/a/379826.svg)](https://asciinema.org/a/379826)
-
 
 ## Output formats
 The following output file formatters are supported: stylish, plain, json. Stylish as a default formatter.
