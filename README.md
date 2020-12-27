@@ -33,6 +33,10 @@ $ gendiff <filepath1> <filepath2>
 
 [![asciicast](https://asciinema.org/a/hdRiT9InCMtLxWcieflcR55RW.svg)](https://asciinema.org/a/hdRiT9InCMtLxWcieflcR55RW)
 
+### Compare files with different file formats
+
+[![asciicast](https://asciinema.org/a/oyOsvaYfhAsZZ5UEMGOwkvZDC.svg)](https://asciinema.org/a/oyOsvaYfhAsZZ5UEMGOwkvZDC)
+
 ## Output formats
 The following output file formatters are supported: stylish, plain, json. Stylish as a default formatter.
 
