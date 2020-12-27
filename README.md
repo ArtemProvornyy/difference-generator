@@ -16,7 +16,7 @@ $ npm link
 $ gendiff --help
 ```
 
-[![asciicast](https://asciinema.org/a/379839.svg)](https://asciinema.org/a/379839)
+[![asciicast](https://asciinema.org/a/505Kieibyc3i6DWBJQgiR5VIO.svg)](https://asciinema.org/a/505Kieibyc3i6DWBJQgiR5VIO)
 
 ## Generate difference of two files
 You can compare two file types: json and yaml.
@@ -27,11 +27,11 @@ $ gendiff <filepath1> <filepath2>
 
 ### Compare JSON files
 
-[![asciicast](https://asciinema.org/a/379824.svg)](https://asciinema.org/a/379824)
+[![asciicast](https://asciinema.org/a/6hnimuGDPrFr56WDOvpVrGZgs.svg)](https://asciinema.org/a/6hnimuGDPrFr56WDOvpVrGZgs)
 
 ### Compare YAML files
 
-[![asciicast](https://asciinema.org/a/379825.svg)](https://asciinema.org/a/379825)
+[![asciicast](https://asciinema.org/a/hdRiT9InCMtLxWcieflcR55RW.svg)](https://asciinema.org/a/hdRiT9InCMtLxWcieflcR55RW)
 
 ## Output formats
 The following output file formatters are supported: stylish, plain, json. Stylish as a default formatter.
@@ -41,12 +41,12 @@ $ gendiff --format [type] <filepath1> <filepath2>
 ```
 ### Stylish format
 
-[![asciicast](https://asciinema.org/a/379841.svg)](https://asciinema.org/a/379841)
+[![asciicast](https://asciinema.org/a/MLEe21DjCrtYI9eU7vBOkFVYL.svg)](https://asciinema.org/a/MLEe21DjCrtYI9eU7vBOkFVYL)
 
 ### Plain format
 
-[![asciicast](https://asciinema.org/a/379827.svg)](https://asciinema.org/a/379827)
+[![asciicast](https://asciinema.org/a/zdlFZe9zsBHbM0xcCnIo3zvtj.svg)](https://asciinema.org/a/zdlFZe9zsBHbM0xcCnIo3zvtj)
 
 ### Json format
 
-[![asciicast](https://asciinema.org/a/379828.svg)](https://asciinema.org/a/379828)
+[![asciicast](https://asciinema.org/a/rvxQrAsKMxSJ24U4DuVrZACkQ.svg)](https://asciinema.org/a/rvxQrAsKMxSJ24U4DuVrZACkQ)
