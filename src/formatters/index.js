@@ -1,15 +1,15 @@
-import stylish from './stylish.js';
-import plain from './plain.js';
-import json from './json.js';
+import renderStylish from './stylish.js';
+import renderPlain from './plain.js';
+import renderJson from './json.js';
 
-export default (format) => {
-  switch (format) {
+export default (formatName, diff) => {
+  switch (formatName) {
     case 'stylish':
-      return stylish;
+      return renderStylish(diff);
     case 'plain':
-      return plain;
+      return renderPlain(diff);
     case 'json':
-      return json;
+      return renderJson(diff);
     default:
       throw new Error('Unsupported format. Please enter the correct format.');
   }
