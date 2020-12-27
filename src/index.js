@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import getParser from './parsers.js';
 import buildDiff from './gendiff.js';
-import switchFormat from './formatters/index.js';
+import format from './formatters/index.js';
 
 const getContent = (filepath) => {
   const cwd = process.cwd();
@@ -24,7 +24,7 @@ export default (filepath1, filepath2, formatName = 'stylish') => {
   const obj1 = parse1(content1);
   const obj2 = parse2(content2);
 
-  const format = switchFormat(formatName);
+  const diff = buildDiff(obj1, obj2);
 
-  return format(buildDiff(obj1, obj2));
+  return format(formatName, diff);
 };
