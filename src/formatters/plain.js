@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 const addQuotes = (value) => (typeof value === 'string' ? `'${value}'` : value);
 
-const plain = (diff) => {
+const renderPlain = (diff) => {
   const iter = (tree, path) => {
     if (tree.length === 0) {
       return [];
@@ -37,4 +37,4 @@ const plain = (diff) => {
   return iter(diff, []).join('\n');
 };
 
-export default plain;
+export default renderPlain;
