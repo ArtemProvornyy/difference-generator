@@ -16,18 +16,19 @@ const plain = (diff) => {
       const outputValue = _.isPlainObject(value) ? '[complex value]' : addQuotes(value);
       const outputOldValue = _.isPlainObject(oldValue) ? '[complex value]' : addQuotes(oldValue);
       const currentPath = [...path, name];
+      const currentPathStr = currentPath.join('.');
 
       if (status === 'nested') {
         return iter(children, currentPath);
       }
       if (status === 'added') {
-        return `Property '${currentPath.join('.')}' was added with value: ${outputValue}`;
+        return `Property '${currentPathStr}' was added with value: ${outputValue}`;
       }
       if (status === 'removed') {
-        return `Property '${currentPath.join('.')}' was removed`;
+        return `Property '${currentPathStr}' was removed`;
       }
       if (status === 'updated') {
-        return `Property '${currentPath.join('.')}' was updated. From ${outputOldValue} to ${outputValue}`;
+        return `Property '${currentPathStr}' was updated. From ${outputOldValue} to ${outputValue}`;
       }
       return [];
     });
