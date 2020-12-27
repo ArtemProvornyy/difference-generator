@@ -1,7 +1,7 @@
 import yaml from 'js-yaml';
 
-export default (format) => {
-  switch (format) {
+export default (fileFormat) => {
+  switch (fileFormat) {
     case '.yaml':
     case '.yml':
       return yaml.safeLoad;
