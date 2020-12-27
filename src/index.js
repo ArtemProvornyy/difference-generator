@@ -21,10 +21,10 @@ export default (filepath1, filepath2, formatName = 'stylish') => {
   const parse1 = getParser(extention1);
   const parse2 = getParser(extention2);
 
-  const content1Obj = parse1(content1);
-  const content2Obj = parse2(content2);
+  const obj1 = parse1(content1);
+  const obj2 = parse2(content2);
 
   const format = switchFormat(formatName);
 
-  return format(buildDiff(content1Obj, content2Obj));
+  return format(buildDiff(obj1, obj2));
 };
