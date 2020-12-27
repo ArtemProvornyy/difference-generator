@@ -11,7 +11,7 @@ const getContent = (filepath) => {
   return fs.readFileSync(absFilepath, 'utf-8');
 };
 
-export default (filepath1, filepath2, format = 'stylish') => {
+export default (filepath1, filepath2, formatName = 'stylish') => {
   const content1 = getContent(filepath1);
   const content2 = getContent(filepath2);
 
@@ -24,7 +24,7 @@ export default (filepath1, filepath2, format = 'stylish') => {
   const content1Obj = parse1(content1);
   const content2Obj = parse2(content2);
 
-  const formatter = switchFormat(format);
+  const format = switchFormat(formatName);
 
-  return formatter(buildDiff(content1Obj, content2Obj));
+  return format(buildDiff(content1Obj, content2Obj));
 };
