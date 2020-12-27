@@ -27,4 +27,11 @@ describe('Generate difference of two files', () => {
 
     expect(genDiff(before, after, format)).toEqual(result);
   });
+  test('with default format', () => {
+    const before = getFixturePath('file1.json');
+    const after = getFixturePath('file2.json');
+    const result = readFile('stylish.txt');
+
+    expect(genDiff(before, after)).toEqual(result);
+  });
 });
