@@ -10,13 +10,28 @@ common:
     key: value
     ops: vops
     doge:
-      wow: so much
+      wow: ''
 group1:
   foo: bar
   baz: bars
   nest: str
 group3:
-  fee: fourth number
+  fee: 100500
   deep:
     id:
-      number: fifth number
+      number: 45
+group4:
+  default:
+  foo: null
+  isNested: none
+  key: false
+  nest:
+    bar: 0
+  someKey: true
+  type: bar
+group5:
+  nest:
+    bas: ''
+  newKey: newValue
+  default: true
+  number: 57

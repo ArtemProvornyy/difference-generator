@@ -1,7 +1,7 @@
 {
   "common": {
     "setting1": "Value 1",
-    "setting2": "first number",
+    "setting2": 200,
     "setting3": true,
     "setting6": {
       "key": "value",
@@ -18,9 +18,27 @@
     }
   },
   "group2": {
-    "abc": "second number",
+    "abc": 12345,
     "deep": {
-      "id": "third number"
+      "id": 45
     }
+  },
+  "group4": {
+    "default": null,
+    "foo": 0,
+    "isNested": false,
+    "nest": {
+      "bar": "",
+      "isNested": true
+    },
+    "type": "bas"
+  },
+  "group5": {
+    "nest": {
+      "bas": ""
+    },
+    "newKey": "newValue",
+    "default": true,
+    "number": 57
   }
 }

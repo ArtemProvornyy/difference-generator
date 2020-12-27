@@ -2,7 +2,7 @@
     common: {
       + follow: false
         setting1: Value 1
-      - setting2: first number
+      - setting2: 200
       - setting3: true
       + setting3: {
             key: value
@@ -14,7 +14,7 @@
         setting6: {
             doge: {
               - wow: too much
-              + wow: so much
+              + wow: 
             }
             key: value
           + ops: vops
@@ -30,17 +30,41 @@
       + nest: str
     }
   - group2: {
-        abc: second number
+        abc: 12345
         deep: {
-            id: third number
+            id: 45
         }
     }
   + group3: {
-        fee: fourth number
+        fee: 100500
         deep: {
             id: {
-                number: fifth number
+                number: 45
             }
         }
+    }
+    group4: {
+        default: null
+      - foo: 0
+      + foo: null
+      - isNested: false
+      + isNested: none
+      + key: false
+        nest: {
+          - bar: 
+          + bar: 0
+          - isNested: true
+        }
+      + someKey: true
+      - type: bas
+      + type: bar
+    }
+    group5: {
+        default: true
+        nest: {
+            bas: 
+        }
+        newKey: newValue
+        number: 57
     }
 }
