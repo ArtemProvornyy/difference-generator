@@ -11,19 +11,13 @@ const buildDiff = (obj1, obj2) => {
     const hasSecondObjKey = _.has(obj2, key);
 
     if (!hasSecondObjKey) {
-      return {
-        name: key, value: firstValue, status: 'removed',
-      };
+      return { name: key, value: firstValue, status: 'removed' };
     }
     if (!hasFirstObjKey) {
-      return {
-        name: key, value: secondValue, status: 'added',
-      };
+      return { name: key, value: secondValue, status: 'added' };
     }
     if (_.isPlainObject(firstValue) && _.isPlainObject(secondValue)) {
-      return {
-        name: key, status: 'nested', children: buildDiff(firstValue, secondValue),
-      };
+      return { name: key, status: 'nested', children: buildDiff(firstValue, secondValue) };
     }
     if (!_.isEqual(firstValue, secondValue)) {
       return {
@@ -31,9 +25,7 @@ const buildDiff = (obj1, obj2) => {
       };
     }
 
-    return {
-      name: key, value: firstValue, status: 'unchanged',
-    };
+    return { name: key, value: firstValue, status: 'unchanged' };
   }, []);
 
   return difference;
