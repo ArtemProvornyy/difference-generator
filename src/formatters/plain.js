@@ -3,36 +3,29 @@ import _ from 'lodash';
 const addQuotes = (value) => (typeof value === 'string' ? `'${value}'` : value);
 
 const renderPlain = (diff) => {
-  const iter = (tree, path) => {
-    if (tree.length === 0) {
-      return [];
-    }
+  const iter = (tree, path) => tree.flatMap((node) => {
+    const {
+      name, value, oldValue, status, children,
+    } = node;
 
-    return tree.flatMap((node) => {
-      const {
-        name, value, oldValue, status, children,
-      } = node;
+    const outputValue = _.isPlainObject(value) ? '[complex value]' : addQuotes(value);
+    const outputOldValue = _.isPlainObject(oldValue) ? '[complex value]' : addQuotes(oldValue);
+    const currentPath = [...path, name];
+    const currentPathStr = currentPath.join('.');
 
-      const outputValue = _.isPlainObject(value) ? '[complex value]' : addQuotes(value);
-      const outputOldValue = _.isPlainObject(oldValue) ? '[complex value]' : addQuotes(oldValue);
-      const currentPath = [...path, name];
-      const currentPathStr = currentPath.join('.');
-
-      if (status === 'nested') {
+    switch (status) {
+      case 'nested':
         return iter(children, currentPath);
-      }
-      if (status === 'added') {
+      case 'added':
         return `Property '${currentPathStr}' was added with value: ${outputValue}`;
-      }
-      if (status === 'removed') {
+      case 'removed':
         return `Property '${currentPathStr}' was removed`;
-      }
-      if (status === 'updated') {
+      case 'updated':
         return `Property '${currentPathStr}' was updated. From ${outputOldValue} to ${outputValue}`;
-      }
-      return [];
-    });
-  };
+      default:
+        return [];
+    }
+  });
 
   return iter(diff, []).join('\n');
 };
