@@ -28,17 +28,17 @@ const renderStylish = (diff) => {
       name, value, status, oldValue, children,
     } = child;
     const indent = ' '.repeat(depth);
-    const nextLevelDepth = status === 'nested' ? depth + 4 : depth + 6;
+    const nextLevelDepth = depth + 4;
 
     switch (status) {
       case 'nested':
         return `${indent}  ${name}: {\n${iter(nextLevelDepth, children)}\n${indent}  }`.split(',');
       case 'updated':
-        return `${indent}- ${name}: ${stringify(oldValue, nextLevelDepth)}\n${indent}+ ${name}: ${stringify(value, nextLevelDepth)}`;
+        return `${indent}- ${name}: ${stringify(oldValue, nextLevelDepth + 2)}\n${indent}+ ${name}: ${stringify(value, nextLevelDepth + 2)}`;
       case 'added':
-        return `${indent}+ ${name}: ${stringify(value, nextLevelDepth)}`;
+        return `${indent}+ ${name}: ${stringify(value, nextLevelDepth + 2)}`;
       case 'removed':
-        return `${indent}- ${name}: ${stringify(value, nextLevelDepth)}`;
+        return `${indent}- ${name}: ${stringify(value, nextLevelDepth + 2)}`;
       case 'unchanged':
         return `${indent}  ${name}: ${value}`;
       default:
