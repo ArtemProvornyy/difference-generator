@@ -23,37 +23,28 @@ const stringify = (inputValue, depth) => {
 };
 
 const renderStylish = (diff) => {
-  const iter = (depth, node) => {
-    if (node.lenght === 0) {
-      return '';
-    }
+  const iter = (depth, node) => node.flatMap((child) => {
+    const {
+      name, value, status, oldValue, children,
+    } = child;
+    const indent = ' '.repeat(depth);
+    const nextLevelDepth = status === 'nested' ? depth + 4 : depth + 6;
 
-    return node.flatMap((child) => {
-      const {
-        name, value, status, oldValue, children,
-      } = child;
-      const indent = ' '.repeat(depth);
-      const nextLevelDepth = status === 'nested' ? depth + 4 : depth + 6;
-
-      if (status === 'nested') {
+    switch (status) {
+      case 'nested':
         return `${indent}  ${name}: {\n${iter(nextLevelDepth, children)}\n${indent}  }`.split(',');
-      }
-      if (status === 'updated') {
+      case 'updated':
         return `${indent}- ${name}: ${stringify(oldValue, nextLevelDepth)}\n${indent}+ ${name}: ${stringify(value, nextLevelDepth)}`;
-      }
-      if (status === 'added') {
+      case 'added':
         return `${indent}+ ${name}: ${stringify(value, nextLevelDepth)}`;
-      }
-      if (status === 'removed') {
+      case 'removed':
         return `${indent}- ${name}: ${stringify(value, nextLevelDepth)}`;
-      }
-      if (status === 'unchanged') {
+      case 'unchanged':
         return `${indent}  ${name}: ${value}`;
-      }
-
-      throw new Error('Unexpected condition. Please check the input data.');
-    });
-  };
+      default:
+        throw new Error(`Unexpected condition ${status}. Please check the input data.`);
+    }
+  });
 
   const startDepth = 2;
   const innerPart = iter(startDepth, diff);
