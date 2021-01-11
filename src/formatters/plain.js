@@ -1,6 +1,12 @@
 import _ from 'lodash';
 
-const addQuotes = (value) => (typeof value === 'string' ? `'${value}'` : value);
+const stringify = (value) => {
+  if (_.isPlainObject(value)) {
+    return '[complex value]';
+  }
+
+  return typeof value === 'string' ? `'${value}'` : value;
+};
 
 const renderPlain = (diff) => {
   const iter = (tree, path) => tree.flatMap((node) => {
@@ -8,8 +14,8 @@ const renderPlain = (diff) => {
       name, value, oldValue, status, children,
     } = node;
 
-    const outputValue = _.isPlainObject(value) ? '[complex value]' : addQuotes(value);
-    const outputOldValue = _.isPlainObject(oldValue) ? '[complex value]' : addQuotes(oldValue);
+    const outputValue = stringify(value);
+    const outputOldValue = stringify(oldValue);
     const currentPath = [...path, name];
     const currentPathStr = currentPath.join('.');
 
