@@ -1,7 +1,5 @@
-install: install-deps
-
-run:
-	bin/gendiff.js __fixtures__/file1.yml __fixtures__/file2.yml
+install:
+	npm ci
 
 publish:
 	npm publish --dry-run
@@ -15,13 +13,7 @@ test:
 test-coverage:
 	npm test -- --coverage --coverageProvider=v8
 
-install-deps:
-	npm ci
-
-local-install:
-	sudo npm link
-
-local-uninstall:
-	sudo npm unlink
+link:
+	npm link
 
 .PHONY: test
